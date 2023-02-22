@@ -13,12 +13,46 @@ export const styles = StyleSheet.create({
     height: '100%',
   },
 
-  text: {
+  permissonDenied: {
     height: '50%',
+    width: '70%',
     zIndex: 1,
     fontSize: 20,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    textAlign: 'center',
+  },
+  buttonCallout: {
+    flex: 1,
+    flexDirection: 'row',
+    position: 'absolute',
+    bottom: 10,
+    alignSelf: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: 'transparent',
+    borderWidth: 0.5,
+    borderRadius: 20,
+  },
+  touchable: {
+    backgroundColor: 'yellow',
+    opacity: 0.5,
+    padding: 10,
+    margin: 10,
+    borderRadius: 10,
+  },
+  touchableText: {
+    fontSize: 24,
   },
 });
+
+export const mapStyle = [
+  {
+    featureType: 'transit.station.bus',
+    stylers: [
+      {
+        visibility: 'on',
+      },
+    ],
+  },
+];
