@@ -6,46 +6,72 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-
 import * as Location from 'expo-location';
-import MapView, {Callout} from 'react-native-maps';
+import MapView, {Callout, Marker} from 'react-native-maps';
 import {styles, mapStyle} from './styles';
+import {API_KEY} from '@env';
+import api from '../api/index';
+import {alert} from '../helpers/alert';
+//import {stopPoints} from '../api/stop_points';
 
 export default function Home() {
   const {width, height} = Dimensions.get('window');
   const ASPECT_RATIO = width / height;
   const LATITUDE_DELTA = 0.02;
   const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+  const [busStops, setBusStops] = useState([]);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [visiblePoints, setVisiblePoints] = useState(false);
   const [location, setLocation] = useState({
     latitude: 0,
     longitude: 0,
     latitudeDelta: LATITUDE_DELTA,
     longitudeDelta: LONGITUDE_DELTA,
   });
-  const [errorMsg, setErrorMsg] = useState('');
 
-  async function getPermition() {
-    let {status} = await Location.requestForegroundPermissionsAsync();
-    getCoords();
-    if (status !== 'granted') {
-      setErrorMsg(
-        'Permission to access location was denied, please go to settings and allow Take a Bus to know your location.',
-      );
-    }
-  }
-
-  async function getCoords() {
-    let {coords} = await Location.getCurrentPositionAsync({});
-    setLocation({
-      latitude: coords.latitude,
-      longitude: coords.longitude,
-      latitudeDelta: LATITUDE_DELTA,
-      longitudeDelta: LONGITUDE_DELTA,
-    });
-  }
   useEffect(() => {
+    async function getPermition() {
+      let {status} = await Location.requestForegroundPermissionsAsync();
+      getCoords();
+      if (status !== 'granted') {
+        setErrorMsg(
+          'Permission to access location was denied, please go to settings and allow Take a Bus to know your location.',
+        );
+      }
+    }
+
+    async function getCoords() {
+      let {coords} = await Location.getCurrentPositionAsync({});
+      setLocation({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+      });
+    }
+    async function fetchBusStops() {
+      const {latitude, longitude} = location;
+      const ApiGet = `stations?apiKey=${API_KEY}&in=${latitude},${longitude}`;
+      const promise = api.get(ApiGet);
+      promise.then(response => GoTo(response.data));
+      promise.catch(() => {
+        alert(
+          'Error ao carregar pontos de ônibus, por favor verifique sua conexão',
+          'OK',
+          'error',
+        );
+      });
+    }
+
     getPermition();
-  }, [location.latitude]);
+    fetchBusStops();
+  }, [visiblePoints]);
+
+  function GoTo(data) {
+    setBusStops([data.stations]);
+    //setBusStops(stopPoints.stations);
+    console.log(busStops);
+  }
 
   if (location.latitude != 0) {
     return (
@@ -54,7 +80,6 @@ export default function Home() {
           <MapView
             style={styles.map}
             initialRegion={location}
-            OnMapready={getPermition()}
             showsPointsOfInterest={true}
             showsUserLocation={true}
             loadingEnabled={true}
@@ -62,16 +87,30 @@ export default function Home() {
             userLocationUpdateInterval={3000}
             zoomEnabled={true}
             zoomTapEnabled={true}
-            zoomControlEnabled={true}
-          />
-          <Callout style={styles.buttonCallout}>
-            <TouchableOpacity
-              style={[styles.touchable]}
-              onPress={() => console.log('press')}>
-              <Text style={styles.touchableText}>Bus Stops</Text>
-            </TouchableOpacity>
-          </Callout>
+            zoomControlEnabled={true}>
+            {visiblePoints &&
+              busStops.map(e => {
+                return e.map((places, index) => {
+                  return (
+                    <Marker
+                      key={index}
+                      coordinate={{
+                        latitude: places.place.location.lat,
+                        longitude: places.place.location.lng,
+                      }}
+                    />
+                  );
+                });
+              })}
+          </MapView>
         </View>
+        <Callout style={styles.buttonCallout}>
+          <TouchableOpacity
+            style={[styles.touchable]}
+            onPress={() => setVisiblePoints(!visiblePoints)}>
+            <Text style={styles.touchableText}>Bus Stops</Text>
+          </TouchableOpacity>
+        </Callout>
       </SafeAreaView>
     );
   } else {
