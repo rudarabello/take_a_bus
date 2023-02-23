@@ -9,9 +9,8 @@ import {
 import * as Location from 'expo-location';
 import MapView, {Callout, Marker} from 'react-native-maps';
 import {styles, mapStyle} from './styles';
-import {API_KEY} from '@env';
-import api from '../api/index';
-import {alert} from '../helpers/alert';
+import {busStopsRequest} from '../../services/apiRequests';
+import {alert} from '../../helpers/alert';
 
 export default function Home() {
   const {width, height} = Dimensions.get('window');
@@ -48,30 +47,27 @@ export default function Home() {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       });
+      fetchBusStops();
     }
     async function fetchBusStops() {
-      const {latitude, longitude} = location;
-      const ApiGet = `stations?apiKey=${API_KEY}&in=${latitude},${longitude}&r=2000`;
-      const promise = api.get(ApiGet);
-      promise.then(response => GoTo(response.data));
-      promise.catch(() => {
+      try {
+        const {latitude, longitude} = location;
+        const {data} = await busStopsRequest(latitude, longitude);
+        console.log(data);
+        setBusStops([data.stations]);
+      } catch (error) {
         alert(
-          'Error ao carregar pontos de ônibus, por favor verifique sua conexão',
+          `Error ao carregar pontos de ônibus, por favor verifique sua conexão ${error}`,
           'OK',
           'error',
         );
-      });
+      }
     }
 
     getPermition();
-    fetchBusStops();
   }, [visiblePoints]);
 
-  function GoTo(data) {
-    setBusStops([data.stations]);
-  }
-
-  if (location.latitude != 0) {
+  if (errorMsg !== '') {
     return (
       <SafeAreaView style={{flex: 1}}>
         <View style={styles.container}>
