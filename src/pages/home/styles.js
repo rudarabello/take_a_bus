@@ -45,6 +45,23 @@ export const styles = StyleSheet.create({
   touchableText: {
     fontSize: 24,
   },
+  iconFancyAlert: {
+    flex: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'yellow',
+    borderRadius: 50,
+    width: '100%',
+  },
+  fancyAlert: {backgroundColor: 'white'},
+  messageFancyAlert: {
+    marginTop: -16,
+    marginBottom: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
 });
 
 export const mapStyle = [
