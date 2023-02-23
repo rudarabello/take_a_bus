@@ -27,7 +27,7 @@ App developed in React Native with Expo as practical challenge in admission proc
  
 Splash        | Home       | Markers            
 :------------------:|:--------------:|:-------------------------:
-<img src="/assets/Screenshot_register.jpg" alt="show_case"  height="500"> | <img src="/assets/Screenshot_login.jpg" alt="show_case"  height="500"> | <img src="/assets/Screenshot_home.jpg" alt="show_case"  height="500"> 
+<img src="/assets/splash_screen.jpg" alt="show_case"  height="500"> | <img src="/assets/home.jpg" alt="show_case"  height="500"> | <img src="/assets/markers2.jpg" alt="show_case"  height="500"> 
 
 
 ## Development
