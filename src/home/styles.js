@@ -37,13 +37,13 @@ export const styles = StyleSheet.create({
   },
   touchable: {
     backgroundColor: 'yellow',
-    opacity: 0.5,
+    opacity: 0.8,
     padding: 10,
     margin: 10,
     borderRadius: 10,
   },
   touchableText: {
-    fontSize: 24,
+    fontSize: 16,
   },
 });
 
