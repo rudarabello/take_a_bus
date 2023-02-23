@@ -34,6 +34,7 @@ Splash        | Home       | Markers
 - Developed using
 
 ![Expo](https://img.shields.io/badge/expo-1C1E24?style=for-the-badge&logo=expo&logoColor=#D04A37)
+![Google - Maps](https://img.shields.io/badge/Google-Maps-blue?style=for-the-badge)
 
 
 ## Run Locally
