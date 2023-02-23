@@ -12,7 +12,6 @@ import {styles, mapStyle} from './styles';
 import {API_KEY} from '@env';
 import api from '../api/index';
 import {alert} from '../helpers/alert';
-//import {stopPoints} from '../api/stop_points';
 
 export default function Home() {
   const {width, height} = Dimensions.get('window');
@@ -22,6 +21,7 @@ export default function Home() {
   const [busStops, setBusStops] = useState([]);
   const [errorMsg, setErrorMsg] = useState('');
   const [visiblePoints, setVisiblePoints] = useState(false);
+  const [button, setButton] = useState(false);
   const [location, setLocation] = useState({
     latitude: 0,
     longitude: 0,
@@ -51,7 +51,7 @@ export default function Home() {
     }
     async function fetchBusStops() {
       const {latitude, longitude} = location;
-      const ApiGet = `stations?apiKey=${API_KEY}&in=${latitude},${longitude}`;
+      const ApiGet = `stations?apiKey=${API_KEY}&in=${latitude},${longitude}&r=2000`;
       const promise = api.get(ApiGet);
       promise.then(response => GoTo(response.data));
       promise.catch(() => {
@@ -69,8 +69,6 @@ export default function Home() {
 
   function GoTo(data) {
     setBusStops([data.stations]);
-    //setBusStops(stopPoints.stations);
-    console.log(busStops);
   }
 
   if (location.latitude != 0) {
@@ -87,6 +85,7 @@ export default function Home() {
             userLocationUpdateInterval={3000}
             zoomEnabled={true}
             zoomTapEnabled={true}
+            onMapReady={() => setButton(!button)}
             zoomControlEnabled={true}>
             {visiblePoints &&
               busStops.map(e => {
@@ -105,11 +104,13 @@ export default function Home() {
           </MapView>
         </View>
         <Callout style={styles.buttonCallout}>
-          <TouchableOpacity
-            style={[styles.touchable]}
-            onPress={() => setVisiblePoints(!visiblePoints)}>
-            <Text style={styles.touchableText}>Bus Stops</Text>
-          </TouchableOpacity>
+          {button && (
+            <TouchableOpacity
+              style={[styles.touchable]}
+              onPress={() => setVisiblePoints(!visiblePoints)}>
+              <Text style={styles.touchableText}>Bus Stops</Text>
+            </TouchableOpacity>
+          )}
         </Callout>
       </SafeAreaView>
     );
