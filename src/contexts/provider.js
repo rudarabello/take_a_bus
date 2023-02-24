@@ -16,6 +16,7 @@ export function DataProvider({children}) {
   const [button, setButton] = useState(false);
   const [visibleAlert, setVisibleAlert] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [locationWasGet, setLocationWasGet] = useState(false);
 
   function toggleAlert(data) {
     setNoticesApi(data);
@@ -49,6 +50,8 @@ export function DataProvider({children}) {
         LongitudeDelta,
         visibleAlert,
         setVisibleAlert,
+        locationWasGet,
+        setLocationWasGet,
       }}>
       {children}
     </DataContext.Provider>

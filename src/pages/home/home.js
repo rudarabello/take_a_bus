@@ -29,6 +29,8 @@ export default function Home() {
     LatitudeDelta,
     LongitudeDelta,
     visibleAlert,
+    locationWasGet,
+    setLocationWasGet,
   } = useContext(DataContext);
 
   useEffect(() => {
@@ -51,6 +53,7 @@ export default function Home() {
         longitudeDelta: LongitudeDelta,
       });
       fetchBusStops();
+      setLocationWasGet(!locationWasGet);
     }
     async function fetchBusStops() {
       try {
@@ -78,38 +81,40 @@ export default function Home() {
   }
 
   if (errorMsg == false) {
-    return (
-      <SafeAreaView style={styles.safeAreaView}>
-        <View style={styles.container}>
-          <Spinner
-            visible={loading}
-            textContent={'Loading...'}
-            textStyle={styles.spinnerTextStyle}
-          />
-          <Map
-            location={location}
-            visiblePoints={visiblePoints}
-            busStops={busStops}
-            setButton={setButton}
-            button={button}
-          />
-        </View>
-        <View>
-          <Alert
-            visibleAlert={visibleAlert}
-            noticesApi={noticesApi}
-            toggleAlert={toggleAlert}
-          />
-          {button && (
-            <Button
-              handleLoading={() => {
-                handleLoading();
-              }}
+    if (locationWasGet) {
+      return (
+        <SafeAreaView style={styles.safeAreaView}>
+          <View style={styles.container}>
+            <Spinner
+              visible={loading}
+              textContent={'Loading...'}
+              textStyle={styles.spinnerTextStyle}
             />
-          )}
-        </View>
-      </SafeAreaView>
-    );
+            <Map
+              location={location}
+              visiblePoints={visiblePoints}
+              busStops={busStops}
+              setButton={setButton}
+              button={button}
+            />
+          </View>
+          <View>
+            <Alert
+              visibleAlert={visibleAlert}
+              noticesApi={noticesApi}
+              toggleAlert={toggleAlert}
+            />
+            {button && (
+              <Button
+                handleLoading={() => {
+                  handleLoading();
+                }}
+              />
+            )}
+          </View>
+        </SafeAreaView>
+      );
+    }
   } else {
     return <ErrorMessage errorMsg={errorMsg} />;
   }
