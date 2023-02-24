@@ -8,7 +8,7 @@
 
 ## Description
 
-App developed in React Native with Expo as practical challenge in admission process to Full Stack engineer position on Take a Bus
+App developed in React Native with Expo as practical challenge in admission process to Full Stack Engineer position on Take a Bus
 
 ## Status
 
@@ -21,13 +21,15 @@ App developed in React Native with Expo as practical challenge in admission proc
 
 ## Feature
 
-- `Find bus stations next to your position based on HERE API` 
+- `Find bus stations on 500m radius range to your position based on HERE API` 
+
+- For more details from HERE API: https://developer.here.com/documentation/public-transit/dev_guide/station-search/by-location-example.html
 
 ## Screens
  
-Splash        | Home       | Markers            
+Splash        | With bus stations    | Without bus stations        
 :------------------:|:--------------:|:-------------------------:
-<img src="/assets/splash_screen.jpg" alt="show_case"  height="500"> | <img src="/assets/home.jpg" alt="show_case"  height="500"> | <img src="/assets/markers2.jpg" alt="show_case"  height="500"> 
+<img src="/assets/splash_screen.jpg" alt="show_case"  height="500"> | <img src="/assets/markers2.jpg" alt="show_case"  height="500"> | <img src="/assets/no_stations.jpg" alt="show_case"  height="500"> 
 
 
 ## Development
@@ -39,22 +41,32 @@ Splash        | Home       | Markers
 
 ## Run Locally
 
+To run this app, previously you must be install expo https://docs.expo.dev/get-started/installation/ . To run on emulator device you need Android Studio https://reactnative.dev/docs/environment-setup, or if you prefer you can run this app on your fisical device.
+
 1. Clone this repository into your machine:
 
 ```bash
-git clone https://github.com/proz-tecnologia/PIT01GP08
+git clone https://github.com/rudarabello/take_a_bus
 ```
 
-2. In project root, and into each package, run this command:
+2. In project root, run this command:
 
 ```bash
-flutter pub get
+yarn installl
 ```
 3. Everything working fine, without any errors, run the app with the following command:
 
 ```bash
-flutter run 
+npm run android 
 ```
+
+`If you prefer run this app in others devices running on terminal the command below and selecting preferred device`
+
+```bash
+npm run start
+```
+
+#### You can also scan the QR code with Expo GO with your device
 
 ## Made by
 
