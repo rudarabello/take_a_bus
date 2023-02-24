@@ -50,7 +50,7 @@ git clone https://github.com/rudarabello/take_a_bus
 2. In project root, run this command:
 
 ```bash
-npm installl
+yarn installl
 ```
 3. Everything working fine, without any errors, run the app with the following command:
 
