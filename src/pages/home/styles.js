@@ -24,23 +24,18 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
   },
-  buttonCallout: {
+  touchable: {
+    opacity: 0.5,
+    padding: 10,
+    margin: 10,
+    alignSelf: 'center',
     flex: 1,
     flexDirection: 'row',
     position: 'absolute',
     bottom: 10,
-    alignSelf: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'transparent',
-    borderWidth: 0.5,
-    borderRadius: 20,
-  },
-  touchable: {
     backgroundColor: 'yellow',
-    opacity: 0.5,
-    padding: 10,
-    margin: 10,
-    borderRadius: 10,
+    borderRadius: 20,
   },
   touchableText: {
     fontSize: 24,
@@ -61,6 +56,9 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
+  },
+  spinnerTextStyle: {
+    color: '#FFF',
   },
 });
 
