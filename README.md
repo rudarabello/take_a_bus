@@ -58,7 +58,7 @@ npm installl
 npm run android 
 ```
 
-`If you prefer you can run this app on iOS device on terminal with and select you device`
+`If you prefer run this app in others devices running on terminal the command below and selecting preferred device`
 
 ```bash
 npm run start
