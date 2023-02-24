@@ -8,7 +8,7 @@
 
 ## Description
 
-App developed in React Native with Expo as practical challenge in admission process to Full Stack engineer position on Take a Bus
+App developed in React Native with Expo as practical challenge in admission process to Full Stack Engineer position on Take a Bus
 
 ## Status
 
