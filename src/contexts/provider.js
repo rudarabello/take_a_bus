@@ -3,6 +3,7 @@ import {Dimensions} from 'react-native';
 
 export const DataContext = createContext({});
 
+// eslint-disable-next-line react/prop-types
 export function DataProvider({children}) {
   const {width, height} = Dimensions.get('window');
   const AspectRatio = width / height;
@@ -14,6 +15,7 @@ export function DataProvider({children}) {
   const [visiblePoints, setVisiblePoints] = useState(false);
   const [button, setButton] = useState(false);
   const [visibleAlert, setVisibleAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   function toggleAlert(data) {
     setNoticesApi(data);
@@ -39,6 +41,8 @@ export function DataProvider({children}) {
         button,
         setButton,
         toggleAlert,
+        loading,
+        setLoading,
         location,
         setLocation,
       }}>

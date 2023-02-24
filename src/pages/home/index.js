@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import * as Location from 'expo-location';
-import MapView, {Marker} from 'react-native-maps';
-import {styles, mapStyle} from './styles';
+import {styles} from './styles';
 import {busStopsRequest} from '../../services/apiRequests';
 import {FancyAlert} from 'react-native-expo-fancy-alerts';
-//import {Map} from '../../components/map_view';
+import {Map} from '../../components/map_view/index';
 import {DataContext} from '../../contexts/provider';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Home() {
   const {
@@ -25,6 +25,8 @@ export default function Home() {
     visiblePoints,
     setVisiblePoints,
     button,
+    loading,
+    setLoading,
     setButton,
     location,
     setLocation,
@@ -33,11 +35,6 @@ export default function Home() {
   const AspectRatio = width / height;
   const LatitudeDelta = 0.02;
   const LongitudeDelta = LatitudeDelta * AspectRatio;
-  // const [busStops, setBusStops] = useState([]);
-  // const [noticesApi, setNoticesApi] = useState();
-  // const [errorMsg, setErrorMsg] = useState(false);
-  // const [visiblePoints, setVisiblePoints] = useState(false);
-  // const [button, setButton] = useState(false);
   const [visibleAlert, setVisibleAlert] = useState(false);
   function toggleAlert(data) {
     setNoticesApi(data);
@@ -107,40 +104,13 @@ export default function Home() {
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
-          <MapView
-            style={styles.map}
-            initialRegion={location}
-            showsPointsOfInterest={true}
-            showsUserLocation={true}
-            loadingEnabled={true}
-            customMapStyle={mapStyle}
-            userLocationUpdateInterval={3000}
-            zoomEnabled={true}
-            zoomTapEnabled={true}
-            onMapLoaded={() => setButton(true)}
-            zoomControlEnabled={true}>
-            {visiblePoints &&
-              busStops.map(e => {
-                return e.map((places, index) => {
-                  return (
-                    <Marker
-                      key={index}
-                      coordinate={{
-                        latitude: places.place.location.lat,
-                        longitude: places.place.location.lng,
-                      }}
-                    />
-                  );
-                });
-              })}
-          </MapView>
-          {/* <Map
+          <Map
             location={location}
             visiblePoints={visiblePoints}
             busStops={busStops}
             setButton={setButton}
             button={button}
-          /> */}
+          />
         </View>
         <View>
           <FancyAlert
