@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import * as Location from 'expo-location';
-import MapView, {Callout, Marker} from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import {styles, mapStyle} from './styles';
 import {busStopsRequest} from '../../services/apiRequests';
 import {FancyAlert} from 'react-native-expo-fancy-alerts';
@@ -79,23 +79,34 @@ export default function Home() {
         if (data.notices) {
           const {notices} = data;
           notices.map(e => {
-            console.log(e.title);
             toggleAlert(e.title);
           });
         }
         setBusStops([data.stations]);
       } catch (error) {
         toggleAlert(`${error}`);
+      } finally {
+        setLoading(false);
       }
     }
 
     getPermition();
   }, [visiblePoints]);
 
+  function handleLoading() {
+    setVisiblePoints(!visiblePoints);
+    setLoading(true);
+  }
+
   if (errorMsg == false) {
     return (
       <SafeAreaView style={{flex: 1}}>
         <View style={styles.container}>
+          <Spinner
+            visible={loading}
+            textContent={'Loading...'}
+            textStyle={styles.spinnerTextStyle}
+          />
           <MapView
             style={styles.map}
             initialRegion={location}
@@ -106,7 +117,7 @@ export default function Home() {
             userLocationUpdateInterval={3000}
             zoomEnabled={true}
             zoomTapEnabled={true}
-            onMapReady={() => setButton(!button)}
+            onMapLoaded={() => setButton(true)}
             zoomControlEnabled={true}>
             {visiblePoints &&
               busStops.map(e => {
@@ -140,21 +151,21 @@ export default function Home() {
               </View>
             }
             style={styles.fancyAlert}>
-            <Text style={styles.messageFancyAlert}>{noticesApi}</Text>
+            <Text style={styles.messageFancyAlert}>
+              {noticesApi} with radius of 500m
+            </Text>
             <TouchableOpacity onPress={toggleAlert}>
-              <Text>Fechar</Text>
+              <Text>Close</Text>
             </TouchableOpacity>
           </FancyAlert>
-        </View>
-        <Callout style={styles.buttonCallout}>
           {button && (
             <TouchableOpacity
               style={[styles.touchable]}
-              onPress={() => setVisiblePoints(!visiblePoints)}>
+              onPress={() => handleLoading()}>
               <Text style={styles.touchableText}>Bus Stops</Text>
             </TouchableOpacity>
           )}
-        </Callout>
+        </View>
       </SafeAreaView>
     );
   } else {
