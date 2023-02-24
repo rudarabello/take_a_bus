@@ -27,7 +27,7 @@ App developed in React Native with Expo as practical challenge in admission proc
  
 Splash        | With bus stations    | Without bus stations        
 :------------------:|:--------------:|:-------------------------:
-<img src="/assets/splash_screen.jpg" alt="show_case"  height="500"> | <img src="/assets/markers2.jpg" alt="show_case"  height="500"> | <img src="/assets/no_station.jpg" alt="show_case"  height="500"> 
+<img src="/assets/splash_screen.jpg" alt="show_case"  height="500"> | <img src="/assets/markers2.jpg" alt="show_case"  height="500"> | <img src="/assets/no_stations.jpg" alt="show_case"  height="500"> 
 
 
 ## Development
