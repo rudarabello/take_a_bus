@@ -1,6 +1,6 @@
 import React from 'react';
 import MapView, {Marker} from 'react-native-maps';
-import {styles, mapStyle} from './styles';
+import {styles, mapStyle} from '../../themes/global_styles';
 
 // eslint-disable-next-line react/prop-types
 export const Map = ({location, visiblePoints, busStops, setButton, button}) => {

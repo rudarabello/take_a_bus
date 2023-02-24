@@ -45,6 +45,10 @@ export function DataProvider({children}) {
         setLoading,
         location,
         setLocation,
+        LatitudeDelta,
+        LongitudeDelta,
+        visibleAlert,
+        setVisibleAlert,
       }}>
       {children}
     </DataContext.Provider>
