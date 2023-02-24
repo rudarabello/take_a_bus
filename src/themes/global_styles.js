@@ -9,6 +9,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 40,
   },
+  safeAreaView: {
+    flex: 1,
+  },
+  spinnerTextStyle: {
+    color: '#FFF',
+  },
   map: {
     width: '100%',
     height: '100%',
