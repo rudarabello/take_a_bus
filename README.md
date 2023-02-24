@@ -39,22 +39,32 @@ Splash        | Home       | Markers
 
 ## Run Locally
 
+To run this app, previously you must be install expo https://docs.expo.dev/get-started/installation/ . To run on emulator device you need Android Studio https://reactnative.dev/docs/environment-setup, or if you prefer you can run this app on your fisical device.
+
 1. Clone this repository into your machine:
 
 ```bash
-git clone https://github.com/proz-tecnologia/PIT01GP08
+git clone https://github.com/rudarabello/take_a_bus
 ```
 
-2. In project root, and into each package, run this command:
+2. In project root, run this command:
 
 ```bash
-flutter pub get
+npm installl
 ```
 3. Everything working fine, without any errors, run the app with the following command:
 
 ```bash
-flutter run 
+npm run android 
 ```
+
+`If you prefer you can run this app on iOS device on terminal with and select you device`
+
+```bash
+npm run start
+```
+
+#### You can also scan the QR code with Expo GO with your device
 
 ## Made by
 
