@@ -130,7 +130,9 @@ export default function Home() {
               </View>
             }
             style={styles.fancyAlert}>
-            <Text style={styles.messageFancyAlert}>{noticesApi}</Text>
+            <Text style={styles.messageFancyAlert}>
+              {noticesApi} with radius of 500m
+            </Text>
             <TouchableOpacity onPress={toggleAlert}>
               <Text>Close</Text>
             </TouchableOpacity>

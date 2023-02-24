@@ -21,7 +21,7 @@ App developed in React Native with Expo as practical challenge in admission proc
 
 ## Feature
 
-- `Find bus stations next to your position based on HERE API` 
+- `Find bus stations on 500m radius range to your position based on HERE API` 
 
 - For more details from HERE API: https://developer.here.com/documentation/public-transit/dev_guide/station-search/by-location-example.html
 
