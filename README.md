@@ -23,6 +23,8 @@ App developed in React Native with Expo as practical challenge in admission proc
 
 - `Find bus stations next to your position based on HERE API` 
 
+- For more details from HERE API: https://developer.here.com/documentation/public-transit/dev_guide/station-search/by-location-example.html
+
 ## Screens
  
 Splash        | With bus stations    | Without bus stations        
