@@ -119,7 +119,7 @@ export default function Home() {
             style={styles.fancyAlert}>
             <Text style={styles.messageFancyAlert}>{noticesApi}</Text>
             <TouchableOpacity onPress={toggleAlert}>
-              <Text>Fechar</Text>
+              <Text>Close</Text>
             </TouchableOpacity>
           </FancyAlert>
         </View>
