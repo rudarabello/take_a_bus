@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   View,
   Dimensions,
@@ -11,28 +11,44 @@ import MapView, {Callout, Marker} from 'react-native-maps';
 import {styles, mapStyle} from './styles';
 import {busStopsRequest} from '../../services/apiRequests';
 import {FancyAlert} from 'react-native-expo-fancy-alerts';
+//import {Map} from '../../components/map_view';
+import {DataContext} from '../../contexts/provider';
 
 export default function Home() {
+  const {
+    busStops,
+    setBusStops,
+    noticesApi,
+    setNoticesApi,
+    errorMsg,
+    setErrorMsg,
+    visiblePoints,
+    setVisiblePoints,
+    button,
+    setButton,
+    location,
+    setLocation,
+  } = useContext(DataContext);
   const {width, height} = Dimensions.get('window');
   const AspectRatio = width / height;
   const LatitudeDelta = 0.02;
   const LongitudeDelta = LatitudeDelta * AspectRatio;
-  const [busStops, setBusStops] = useState([]);
-  const [noticesApi, setNoticesApi] = useState();
-  const [errorMsg, setErrorMsg] = useState(false);
-  const [visiblePoints, setVisiblePoints] = useState(false);
-  const [button, setButton] = useState(false);
+  // const [busStops, setBusStops] = useState([]);
+  // const [noticesApi, setNoticesApi] = useState();
+  // const [errorMsg, setErrorMsg] = useState(false);
+  // const [visiblePoints, setVisiblePoints] = useState(false);
+  // const [button, setButton] = useState(false);
   const [visibleAlert, setVisibleAlert] = useState(false);
   function toggleAlert(data) {
     setNoticesApi(data);
     setVisibleAlert(!visibleAlert);
   }
-  const [location, setLocation] = useState({
-    latitude: 40.7415,
-    longitude: -74.0034,
-    latitudeDelta: LatitudeDelta,
-    longitudeDelta: LongitudeDelta,
-  });
+  // const [location, setLocation] = useState({
+  //   latitude: 40.7415,
+  //   longitude: -74.0034,
+  //   latitudeDelta: LatitudeDelta,
+  //   longitudeDelta: LongitudeDelta,
+  // });
 
   useEffect(() => {
     async function getPermition() {
@@ -107,6 +123,13 @@ export default function Home() {
                 });
               })}
           </MapView>
+          {/* <Map
+            location={location}
+            visiblePoints={visiblePoints}
+            busStops={busStops}
+            setButton={setButton}
+            button={button}
+          /> */}
         </View>
         <View>
           <FancyAlert
