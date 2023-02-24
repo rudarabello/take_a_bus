@@ -1,6 +1,6 @@
 import React, {useEffect, useContext} from 'react';
-import {View, SafeAreaView} from 'react-native';
 import * as Location from 'expo-location';
+import {View, SafeAreaView} from 'react-native';
 import {styles} from '../../themes/global_styles';
 import {busStopsRequest} from '../../services/apiRequests';
 import {Map} from '../../components/map_view/map';
@@ -53,7 +53,7 @@ export default function Home() {
         longitudeDelta: LongitudeDelta,
       });
       fetchBusStops();
-      setLocationWasGet(!locationWasGet);
+      setLocationWasGet(true);
     }
     async function fetchBusStops() {
       try {
