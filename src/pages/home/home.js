@@ -38,8 +38,7 @@ export default function Home() {
       let {status} = await Location.requestForegroundPermissionsAsync();
       getCoords();
       if (status !== 'granted') {
-        setErrorMsg(true);
-        toggleAlert(
+        setErrorMsg(
           'Permission to access location was denied, please go to settings and allow Take a Bus to know your location.',
         );
       }
