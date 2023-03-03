@@ -63,9 +63,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     textAlign: 'center',
   },
-  spinnerTextStyle: {
-    color: '#FFF',
-  },
 });
 
 export const mapStyle = [
